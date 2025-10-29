@@ -1,0 +1,116 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String
+  settings  UserSettings?
+  phrases   Phrase[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("users")
+}
+
+model UserSettings {
+  id           String  @id @default(cuid())
+  userId       String  @unique
+  user         User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  theme        String  @default("light") // light, dark, high-contrast
+  fontSize     String  @default("medium") // small, medium, large, extra-large
+  speechRate   Float   @default(1.0)
+  speechPitch  Float   @default(1.0)
+  speechVolume Float   @default(1.0)
+  language     String  @default("pt-BR")
+  showText     Boolean @default(true)
+  showImages   Boolean @default(true)
+  gridSize     String  @default("medium") // small, medium, large
+  autoSpeak    Boolean @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@map("user_settings")
+}
+
+model Category {
+  id            String        @id @default(cuid())
+  name          String
+  icon          String
+  color         String
+  order         Int           @default(0)
+  subcategories Subcategory[]
+  pictograms    Pictogram[]
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+
+  @@map("categories")
+}
+
+model Subcategory {
+  id         String   @id @default(cuid())
+  name       String
+  categoryId String
+  category   Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  order      Int      @default(0)
+  pictograms Pictogram[]
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@map("subcategories")
+}
+
+model Pictogram {
+  id           String      @id @default(cuid())
+  arasaacId    Int         @unique
+  name         String
+  imageUrl     String
+  categoryId   String
+  category     Category    @relation(fields: [categoryId], references: [id])
+  subcategoryId String?
+  subcategory  Subcategory? @relation(fields: [subcategoryId], references: [id])
+  tags         String[]
+  language     String      @default("pt-BR")
+  phrases      PhrasePictogram[]
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+
+  @@map("pictograms")
+}
+
+model Phrase {
+  id          String            @id @default(cuid())
+  name        String
+  text        String
+  audioUrl    String?
+  isCustom    Boolean           @default(false)
+  userId      String?
+  user        User?             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  pictograms  PhrasePictogram[]
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+
+  @@map("phrases")
+}
+
+model PhrasePictogram {
+  id          String    @id @default(cuid())
+  phraseId    String
+  phrase      Phrase    @relation(fields: [phraseId], references: [id], onDelete: Cascade)
+  pictogramId String
+  pictogram   Pictogram @relation(fields: [pictogramId], references: [id], onDelete: Cascade)
+  order       Int       @default(0)
+  createdAt   DateTime  @default(now())
+
+  @@unique([phraseId, pictogramId])
+  @@map("phrase_pictograms")
+}

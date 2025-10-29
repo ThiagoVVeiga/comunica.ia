@@ -1,3 +1,4 @@
+<<<<<<< Current (Your changes)
 (cd "$(git rev-parse --show-toplevel)" && git apply --3way <<'EOF'
 diff --git a/README.md b/README.md
 --- a/README.md
@@ -94,3 +95,122 @@ diff --git a/README.md b/README.md
 +MIT License - veja [LICENSE](LICENSE) para detalhes.
 EOF
 )
+=======
+# TD Snap Web - Plataforma de Comunicação Alternativa
+
+Uma plataforma web moderna e acessível para comunicação alternativa, baseada no conceito do TD Snap e integrada com a base de dados ARASAAC.
+
+## 🎯 Objetivos
+
+- Criar uma interface web simples e intuitiva para comunicação alternativa
+- Integrar com a base de dados ARASAAC de pictogramas
+- Implementar síntese de voz para conversão de seleções em fala
+- Permitir personalização de categorias e frases
+- Focar em acessibilidade e usabilidade
+
+## 🏗️ Arquitetura
+
+### Frontend (React + TypeScript)
+- Interface responsiva e acessível
+- Gerenciamento de estado com Context API
+- Integração com APIs de síntese de voz
+- Suporte a diferentes temas e tamanhos de fonte
+
+### Backend (Node.js + Express)
+- API REST para gerenciamento de dados
+- Integração com ARASAAC
+- Sistema de cache com Redis
+- Banco de dados PostgreSQL para configurações
+
+## 🚀 Tecnologias
+
+- **Frontend**: React, TypeScript, Tailwind CSS, Framer Motion
+- **Backend**: Node.js, Express, PostgreSQL, Redis
+- **Deploy**: Docker, Vercel (frontend), Railway (backend)
+
+## 📁 Estrutura do Projeto
+
+```
+td-snap-web/
+├── frontend/          # Aplicação React
+├── backend/           # API Node.js
+├── shared/            # Tipos e utilitários compartilhados
+├── docs/              # Documentação
+└── docker-compose.yml # Configuração Docker
+```
+
+## 🎨 Funcionalidades Principais
+
+1. **Sistema de Categorias**
+   - Organização hierárquica de pictogramas
+   - Categorias personalizáveis
+   - Busca e filtros
+
+2. **Síntese de Voz**
+   - Conversão de seleções em fala
+   - Múltiplos idiomas
+   - Velocidade e tom configuráveis
+
+3. **Personalização**
+   - Criação de frases personalizadas
+   - Configuração de temas
+   - Ajustes de acessibilidade
+
+4. **Acessibilidade**
+   - Suporte a leitores de tela
+   - Navegação por teclado
+   - Alto contraste
+   - Tamanhos de fonte ajustáveis
+
+## 🚀 Como Executar
+
+### Pré-requisitos
+- Node.js 18.19.0 ou superior
+- npm
+
+### Instalação Rápida
+
+1. Clone o repositório:
+```bash
+git clone <url-do-repositorio>
+cd td-snap-web
+```
+
+2. Execute o script de instalação:
+```bash
+.\instalar.ps1
+```
+
+### Execução Manual
+
+**Terminal 1 - Backend:**
+```bash
+cd backend
+npm run dev
+```
+
+**Terminal 2 - Frontend:**
+```bash
+cd frontend
+npm start
+```
+
+### URLs
+- **Frontend**: http://localhost:3000
+- **Backend**: http://localhost:3001
+- **Health Check**: http://localhost:3001/health
+
+## 📚 Documentação
+
+- [Guia de Desenvolvimento](./docs/development.md)
+- [API Reference](./docs/api.md)
+- [Guia de Acessibilidade](./docs/accessibility.md)
+
+## 🤝 Contribuição
+
+Este projeto está em desenvolvimento ativo. Contribuições são bem-vindas!
+
+## 📄 Licença
+
+MIT License - veja [LICENSE](LICENSE) para detalhes.
+>>>>>>> Incoming (Background Agent changes)
