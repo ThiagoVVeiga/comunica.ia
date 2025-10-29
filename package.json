@@ -1,0 +1,21 @@
+{
+  "name": "td-snap-web",
+  "version": "1.0.0",
+  "description": "Plataforma de comunicação alternativa baseada no TD Snap",
+  "main": "index.js",
+  "scripts": {
+    "dev": "concurrently \"npm run dev:frontend\" \"npm run dev:backend\"",
+    "dev:frontend": "cd frontend && npm run dev",
+    "dev:backend": "cd backend && npm run dev",
+    "build": "npm run build:frontend && npm run build:backend",
+    "build:frontend": "cd frontend && npm run build",
+    "build:backend": "cd backend && npm run build",
+    "start": "cd backend && npm start"
+  },
+  "keywords": ["aac", "comunicação-alternativa", "td-snap", "arasaac"],
+  "author": "Seu Nome",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
